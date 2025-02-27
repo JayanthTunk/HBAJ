@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajay's Birthday</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: gold;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .birthday-video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            display: none; /* Hidden by default */
+        }
+
+        .countdown-box {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: black;
+            color: gold;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .countdown-box {
+                font-size: 1.2em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video class="birthday-video" id="birthdayVideo" autoplay loop muted>
+        <source src="Ajay Muppa.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="countdown-box" id="countdownBox"></div>
+
+    <script>
+        function updateCountdown() {
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            let birthday = new Date(currentYear, 1, 27); // Feb 27 (Month index starts from 0)
+
+            if (today.getMonth() === 1 && today.getDate() === 27) {
+                document.getElementById("birthdayVideo").style.display = "block";
+                document.getElementById("countdownBox").style.display = "none"; 
+                return;
+            }
+
+            if (today > birthday) {
+                birthday = new Date(currentYear + 1, 1, 27);
+            }
+
+            const diff = birthday - today;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("countdownBox").innerHTML = 
+                `Next Birthday in: <br> ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            setTimeout(updateCountdown, 1000);
+        }
+
+        updateCountdown();
+    </script>
+</body>
+</html>
