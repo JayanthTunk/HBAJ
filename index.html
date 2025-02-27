@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajay's Birthday</title>
+    <title>Ajay's Birthday Countdown</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: gold;
-            color: black;
+            background-color: black;
+            color: gold;
             font-family: Arial, sans-serif;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .birthday-video {
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Full height on desktop */
             object-fit: cover;
             display: none; /* Hidden by default */
         }
 
+        /* Center and resize video on mobile */
+        @media (max-width: 600px) {
+            .birthday-video {
+                width: 90%; /* Keep it within screen width */
+                height: 30vh; /* Reduce height */
+                display: none; /* Hidden by default */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
         .countdown-box {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             background: black;
             color: gold;
             padding: 20px;
@@ -34,6 +48,8 @@
             width: 80%;
             max-width: 400px;
             text-align: center;
+            position: absolute;
+            bottom: 20px;
         }
 
         @media (max-width: 600px) {
